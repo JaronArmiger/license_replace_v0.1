@@ -3,8 +3,8 @@
 **License Plate Replace** utilizes the yolov5 and segment_anything libraries to replace an input car image's license plate with a default logo
 
 <p float="left">
-  <img src="resources/demo-images/original16.jpg?raw=true" width="40%" />
-  <img src="resources/demo-images/result_replace16.jpg?raw=true" width="40%" /> 
+  <img src="resources/demo-images/car11.jpg?raw=true" width="40%" />
+  <img src="resources/demo-images/result_replace_11.jpg?raw=true" width="40%" /> 
 </p>
 
 
