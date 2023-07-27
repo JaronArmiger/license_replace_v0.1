@@ -2,15 +2,28 @@
 
 **License Plate Replace** utilizes the yolov5 and segment_anything libraries to replace an input car image's license plate with a default logo
 
-<p float="left">
-  <img src="resources/demo-images/car11.jpg?raw=true" width="40%" />
-  <img src="resources/demo-images/result_replace_11.jpg?raw=true" width="40%" /> 
-</p>
+<div style="display:flex; justify-content:space-between">
+  <div>
+    <h4>original</h4>
+    <img src="resources/demo-images/car8.jpg?raw=true" />
+  </div>
+  
+  <div>
+    <h4>default logo</h4>
+    <img src="resources/demo-images/rep_08_default.jpg?raw=true"  />
+  </div>
+  <div>
+    <h4>custom logo (passed as second command line arg)</h4>
+    <img src="resources/demo-images/rep_08_arg.jpg?raw=true" />
+  </div>
+</div>
 
 
 ## Usage
+car image path required
+logo image path optional (if none, default logo is used)
 ```bash
-python3 app.py images/car1.jpg
+python3 app.py /path/to/car_image [/path/to/logo_image]
 ```
 
 modified images are output to __static/results/__ directory

@@ -21,7 +21,7 @@ def centroid(x,y):
 def find_center(coords):
     return np.array(centroid(*coords.squeeze().T), dtype="int32")
 
-def scale_corners(corners, center_coords, multiple=1.5):
+def scale_corners(corners, center_coords, multiple=1.3):
     return (((corners - center_coords)  * multiple) + center_coords).astype("int32")
 
 def get_vertical_stretch_amount(corners, divisor=5):

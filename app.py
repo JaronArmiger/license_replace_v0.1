@@ -6,9 +6,16 @@ import cv2
 from segment_anything import sam_model_registry, SamPredictor
 from src.utils import corner_sorter, stretch_and_scale
 
-if len(sys.argv) != 2:
-    print('provide one command line argument (path to car image)')
+if len(sys.argv) > 3 or len(sys.argv) < 1:
+    print('provide car image and (optionally) logo image as a command line prompt')
     sys.exit()
+
+car_image_path = sys.argv[1]
+
+if len(sys.argv) == 3:
+   logo_image_path = sys.argv[2]
+else:
+   logo_image_path = './static/allo_logo_rounded_border_01.png'
 
 image = cv2.imread(sys.argv[1])
 image = cv2.cvtColor(image, cv2.COLOR_BGR2RGB)
@@ -76,7 +83,7 @@ if len(corners)!= 4:
 modified_corners = stretch_and_scale(corners)
 
 
-allo_logo = cv2.imread('./static/allo_logo_rounded.png')
+allo_logo = cv2.imread(logo_image_path)
 rounded_mask_white = cv2.imread('./static/rounded_mask_white.png')
 
 bottom_left = [0, allo_logo.shape[0]]
