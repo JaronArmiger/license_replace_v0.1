@@ -1,5 +1,21 @@
 from scipy.spatial import distance as dist
 import numpy as np
+import boto3
+import cv2
+
+def read_s3_image(bucket_name, image_key):
+    s3 = boto3.resource("s3")
+
+    bucket = s3.Bucket(bucket_name)
+    image = bucket.Object(image_key)
+    img_data = image.get().get('Body').read()
+    img_arr = np.asarray(bytearray(img_data), dtype=np.uint8)
+    img = cv2.imdecode(img_arr, -1)
+    return img
+
+def write_s3_image(img_string, bucket_name, image_key):
+    s3 = boto3.client("s3")
+    s3.put_object(Bucket=bucket_name, Key=image_key, Body=img_string)
 
 def corner_sorter(pts):
     pts = pts.squeeze()

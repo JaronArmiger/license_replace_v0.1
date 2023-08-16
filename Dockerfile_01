@@ -1,0 +1,34 @@
+FROM public.ecr.aws/lambda/python:3.9
+
+# set environment variables
+ENV PYTHONUNBUFFERED 1
+ENV USE_NNPACK=0
+
+# run this before copying requirements for cache efficiency
+RUN pip install --upgrade pip
+
+# set work directory early so remiaining paths can be relative
+# WORKDIR /
+
+# adding requirments file to current directory
+# just this file first to cache the pip install step when code changes
+COPY requirements.txt ${LAMBDA_TASK_ROOT}
+
+# install dependencies
+# RUN apt-get -y update
+# RUN apt-get -y install ffmpeg libsm6 libxext6 git
+RUN pip install -r requirements.txt
+
+# RUN git clone https://github.com/ultralytics/yolov5 --depth 1
+# RUN git clone git@github.com:facebookresearch/segment-anything.git --depth 1
+# RUN cd segment-anything
+# RUN pip install -e .
+# RUN pip install git+https://github.com/facebookresearch/segment-anything.git
+# RUN cd ..
+
+# copy code itself from context to image
+# COPY . .
+
+COPY . ${LAMBDA_TASK_ROOT}
+
+CMD ["lambda_function.handler"]
