@@ -12,9 +12,13 @@ bucket_name = "license-replace"
 
 def handler(event, context):
     # load vars from event
-    bucket_name = event.bucket_name
-    logo_image_path = event.logo_image_path or './static/allo_logo_rounded_border_01.png'
-    car_image_path = event.car_image_path
+    bucket_name = event["bucket_name"]
+    car_image_path = event["car_image_path"]
+
+    if "logo_image_path" in event:
+        logo_image_path = event["logo_image_path"]
+    else:
+        logo_image_path = './static/allo_logo_rounded_border_01.png'
 
     # read image from s3 bucket
     image = read_s3_image(bucket_name, car_image_path)
